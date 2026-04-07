@@ -38,7 +38,10 @@ npm install
 npm run dev
 
 # Install backend dependencies
+npm install react-router-dom
 
+# Put on .env
+VITE_TMDB_API_KEY={key}
 ```
 
 ---
