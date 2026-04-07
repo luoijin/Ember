@@ -57,7 +57,7 @@ const Home = () => {
           <div 
             key={movie.id} 
             className="movie-card"
-            onClick={() => navigate(`/watch/${movie.id}`)}
+            onClick={() => navigate(`/movie/${movie.id}`)}
             onMouseEnter={() => handleMouseEnter(movie.id)}
             onMouseLeave={handleMouseLeave}
           >
