@@ -6,23 +6,12 @@ Ember is an open-source streaming web app inspired by [Cineby](https://cineby.gd
 
 ---
 
-## ✨ Features
-
-- 🎬 Stream movies and TV shows for free
-- 🔍 Search across a vast content library
-- 📺 Clean, distraction-free player
-- 🌙 Dark mode UI optimized for viewing
-- ⚡ Fast loading with no login required
-- 📱 Responsive design for all devices
-
----
-
 ## 🛠️ Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
-| Frontend | React, Tailwind CSS |
-| Backend | FastAPI, Python |
+| Frontend | React |
+| Backend | |
 | Data | Web Scraping, REST APIs |
 | Deployment | Vercel / Railway |
 
@@ -59,17 +48,7 @@ uvicorn main:app --reload
 ## 📁 Project Structure
 
 ```
-ember/
-├── client/          # React frontend
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   └── App.jsx
-├── server/          # FastAPI backend
-│   ├── routes/
-│   ├── scrapers/
-│   └── main.py
-└── README.md
+
 ```
 
 ---
@@ -78,8 +57,8 @@ ember/
 
 | Avatar | Name | GitHub | Contributions |
 |--------|------|--------|---------------|
-| 👩‍💻 | **Anne Loraine Pardillo** | [@annepardillo](https://github.com/annepardillo) | Project Lead, UI/UX, Frontend Developer |
-| 👨‍💻 | **Jan Nino Andrie Bansag** | [@janbansag](https://github.com/janbansag) | Backend Developer, API Integration |
+| 👩‍💻 | **Anne Loraine Pardillo** | [@annepardillo](https://github.com/annepardillo) |  |
+| 👨‍💻 | **Jan Nino Andrie Bansag** | [@janbansag](https://github.com/janbansag) | |
 
 ---
 
