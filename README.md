@@ -56,7 +56,7 @@ npm run dev
 | Avatar | Name | GitHub | Contributions |
 |--------|------|--------|---------------|
 | <img src="https://github.com/luoijin.png" width="50" height="50"/> | **Anne Loraine Pardillo** | [@luoijin](https://github.com/luoijin) | |
-| <img src="https://github.com/janxxy.png" width="50" height="50"/> | **Jan Nino Andrie Bansag** | [@janxxy](https://github.com/janxxy) | |
+| <img src="https://github.com/janninobansag.png" width="50" height="50"/> | **Jan Nino Andrie Bansag** | [@janxxy](https://github.com/janninobansag) | |
 
 ---
 
