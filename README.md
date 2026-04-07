@@ -38,9 +38,7 @@ npm install
 npm run dev
 
 # Install backend dependencies
-cd ../server
-pip install -r requirements.txt
-uvicorn main:app --reload
+
 ```
 
 ---
@@ -57,8 +55,8 @@ uvicorn main:app --reload
 
 | Avatar | Name | GitHub | Contributions |
 |--------|------|--------|---------------|
-| 👩‍💻 | **Anne Loraine Pardillo** | [@annepardillo](https://github.com/annepardillo) |  |
-| 👨‍💻 | **Jan Nino Andrie Bansag** | [@janbansag](https://github.com/janbansag) | |
+| <img src="https://github.com/luoijin.png" width="50" height="50"/> | **Anne Loraine Pardillo** | [@luoijin](https://github.com/luoijin) | |
+| <img src="https://github.com/janxxy.png" width="50" height="50"/> | **Jan Nino Andrie Bansag** | [@janxxy](https://github.com/janxxy) | |
 
 ---
 
