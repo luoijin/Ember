@@ -1,0 +1,46 @@
+@import '../../../styles/variables.css';
+
+.rating-stars {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.rating-stars__star {
+  font-size: var(--font-md);
+  color: var(--text-tertiary);
+  transition: color var(--transition-fast);
+}
+
+.rating-stars__star--filled {
+  color: gold;
+}
+
+.rating-stars__star--half {
+  position: relative;
+  color: gold;
+}
+
+.rating-stars__value {
+  margin-left: var(--spacing-xs);
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+}
+
+/* Interactive mode */
+.rating-stars--interactive {
+  cursor: pointer;
+}
+
+.rating-stars--interactive .rating-stars__star:hover {
+  transform: scale(1.1);
+}
+
+/* Sizes */
+.rating-stars--small .rating-stars__star {
+  font-size: var(--font-sm);
+}
+
+.rating-stars--large .rating-stars__star {
+  font-size: var(--font-xl);
+}

@@ -1,0 +1,43 @@
+@import '../../../styles/variables.css';
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: var(--bg-primary);
+}
+
+.loading-spinner__content {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  font-size: var(--font-lg);
+  color: var(--accent);
+}
+
+.loading-spinner__icon {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Inline variant */
+.loading-spinner--inline {
+  min-height: auto;
+  padding: var(--spacing-xl);
+}
+
+.loading-spinner--inline .loading-spinner__icon {
+  width: 30px;
+  height: 30px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

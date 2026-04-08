@@ -1,0 +1,79 @@
+/* Design Tokens - Single Source of Truth */
+:root {
+  /* Dark Theme Colors */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #141414;
+  --bg-tertiary: #1a1a1a;
+  --bg-card: #1f1f1f;
+  --bg-hover: #2a2a2a;
+  --bg-overlay: rgba(0, 0, 0, 0.85);
+  
+  --text-primary: #ffffff;
+  --text-secondary: #b3b3b3;
+  --text-tertiary: #808080;
+  
+  --accent: #e50914;
+  --accent-hover: #f6121d;
+  --accent-glow: rgba(229, 9, 20, 0.3);
+  
+  --border: #333333;
+  --border-light: #404040;
+  
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 20px rgba(229, 9, 20, 0.3);
+  
+  --gradient-hero: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.9) 100%);
+  --gradient-card: linear-gradient(135deg, #1f1f1f 0%, #1a1a1a 100%);
+  --gradient-overlay: linear-gradient(135deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.85) 100%);
+  
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  
+  /* Typography */
+  --font-xs: 12px;
+  --font-sm: 14px;
+  --font-md: 16px;
+  --font-lg: 20px;
+  --font-xl: 24px;
+  --font-2xl: 32px;
+  --font-3xl: 48px;
+  
+  /* Layout */
+  --container-max-width: 1400px;
+  --header-height: 70px;
+}
+
+/* Responsive Variables */
+@media (max-width: 1024px) {
+  :root {
+    --spacing-2xl: 32px;
+    --font-2xl: 28px;
+    --font-3xl: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --header-height: 60px;
+    --spacing-2xl: 24px;
+    --font-2xl: 24px;
+  }
+}
