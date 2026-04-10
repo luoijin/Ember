@@ -1,5 +1,4 @@
-@import '../../../styles/variables.css';
-
+/* MovieCard.css - ONLY movie card styles */
 .movie-card {
   position: relative;
   cursor: pointer;
@@ -12,10 +11,6 @@
 .movie-card:hover {
   transform: translateY(-8px);
   box-shadow: var(--shadow-lg);
-}
-
-.movie-card:hover .movie-card__image {
-  transform: scale(1.05);
 }
 
 .movie-card__image-wrapper {
@@ -31,6 +26,10 @@
   transition: transform var(--transition-normal);
 }
 
+.movie-card:hover .movie-card__image {
+  transform: scale(1.05);
+}
+
 .movie-card__overlay-title {
   position: absolute;
   bottom: 0;
@@ -42,7 +41,6 @@
   font-size: var(--font-sm);
   font-weight: 600;
   color: white;
-  animation: slideUp var(--transition-normal) ease;
   z-index: 10;
   pointer-events: none;
 }
@@ -75,18 +73,7 @@
   color: gold;
 }
 
-@keyframes slideUp {
-  from {
-    transform: translateY(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-/* Responsive */
+/* Responsive - only what's specific to MovieCard */
 @media (max-width: 768px) {
   .movie-card__info {
     padding: var(--spacing-sm);

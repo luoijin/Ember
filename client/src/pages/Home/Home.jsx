@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getPopularMovies, getTopRated, getNowPlaying, getUpcoming } from "../../services/api";
-// import "..App";
-import "../../styles/global.css"; 
+import './Home.css';                              // ✅ CSS import
+import MovieGrid from '../../components/movies/MovieGrid/MovieGrid';  // ✅ Component
+import LoadingSpinner from '../../components/common/LoadingSpinner/LoadingSpinner';  // ✅ Component
+// ❌ REMOVE this line: import "../../styles/global.css"; 
 
 const Home = () => {
   const [popularMovies, setPopularMovies] = useState([]);
@@ -10,7 +12,6 @@ const Home = () => {
   const [nowPlaying, setNowPlaying] = useState([]);
   const [upcoming, setUpcoming] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [hoveredMovieId, setHoveredMovieId] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,61 +29,47 @@ const Home = () => {
       });
   }, []);
 
-  // Handle hover with 5 second timeout
-  const handleMouseEnter = (movieId) => {
-    setHoveredMovieId(movieId);
-    // Clear previous timeout if exists
-    if (window.titleTimeout) clearTimeout(window.titleTimeout);
-    // Set timeout to clear after 5 seconds
-    window.titleTimeout = setTimeout(() => {
-      setHoveredMovieId(null);
-    }, 5000);
-  };
-
-  const handleMouseLeave = () => {
-    // Clear the timeout and hide title immediately when mouse leaves
-    if (window.titleTimeout) {
-      clearTimeout(window.titleTimeout);
-      setHoveredMovieId(null);
-    }
-  };
-
-  if (loading) return <div className="loading">Loading movies...</div>;
-
-  // Reusable movie section component
-  const MovieSection = ({ title, movies }) => (
-    <div className="movie-section">
-      <h1>{title}</h1>
-      <div className="movie-grid">
-        {movies.map(movie => (
-          <div 
-            key={movie.id} 
-            className="movie-card"
-            onClick={() => navigate(`/movie/${movie.id}`)}
-            onMouseEnter={() => handleMouseEnter(movie.id)}
-            onMouseLeave={handleMouseLeave}
-          >
-            <img 
-              src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} 
-              alt={movie.title} 
-            />
-            {hoveredMovieId === movie.id && (
-              <div className="movie-title-overlay">
-                {movie.title}
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+  if (loading) return <LoadingSpinner />;  // ✅ Now using LoadingSpinner component
 
   return (
-    <div className="container">
-      <MovieSection title="Popular Movies" movies={popularMovies} />
-      <MovieSection title="Top Rated Movies" movies={topRatedMovies} />
-      <MovieSection title="Now Playing on Theaters" movies={nowPlaying} />
-      <MovieSection title="Upcoming Movies" movies={upcoming} />
+    <div className="home">
+      {/* Hero Section - matches your Home.css */}
+      <div className="home__hero">
+        <div className="home__hero-overlay"></div>
+        <div className="home__hero-content">
+          <h1 className="home__hero-title">Welcome to Ember Movies</h1>
+          <p className="home__hero-subtitle">
+            Discover the best movies, TV shows, and more.
+          </p>
+        </div>
+      </div>
+
+      <div className="container">
+        {/* ✅ Using MovieGrid component instead of MovieSection */}
+        <MovieGrid 
+          title="Popular Movies" 
+          movies={popularMovies}
+          onMovieClick={(id) => navigate(`/movie/${id}`)}
+        />
+        
+        <MovieGrid 
+          title="Top Rated Movies" 
+          movies={topRatedMovies}
+          onMovieClick={(id) => navigate(`/movie/${id}`)}
+        />
+        
+        <MovieGrid 
+          title="Now Playing on Theaters" 
+          movies={nowPlaying}
+          onMovieClick={(id) => navigate(`/movie/${id}`)}
+        />
+        
+        <MovieGrid 
+          title="Upcoming Movies" 
+          movies={upcoming}
+          onMovieClick={(id) => navigate(`/movie/${id}`)}
+        />
+      </div>
     </div>
   );
 };

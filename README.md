@@ -49,7 +49,92 @@ VITE_TMDB_API_KEY={key}
 ## 📁 Project Structure
 
 ```
+<<<<<<< Updated upstream
 
+=======
+EMBER/
+├── client/src/
+│   ├── assets/
+│   │   ├── fonts/
+│   │   ├── icons/
+│   │   └── images/
+│   ├── components/
+│   │   ├── common/
+│   │   │   ├── Button/
+│   │   │   │   └── Button.css
+│   │   │   ├── Container/
+│   │   │   │   └── Container.css
+│   │   │   └── LoadingSpinner/
+│   │   │       ├── LoadingSpinner.css
+│   │   │       └── LoadingSpinner.jsx
+│   │   ├── layout/
+│   │   │   ├── Footer/
+│   │   │   │   ├── Footer.css
+│   │   │   │   └── Footer.jsx
+│   │   │   ├── Header/
+│   │   │   │   ├── Header.css
+│   │   │   │   └── Header.jsx
+│   │   │   └── Layout/
+│   │   │       ├── Layout.css
+│   │   │       └── Layout.jsx
+│   │   └── movies/
+│   │       ├── MovieCard/
+│   │       │   ├── MovieCard.css
+│   │       │   └── MovieCard.jsx
+│   │       ├── MovieDetails/
+│   │       │   ├── MovieDetails.css
+│   │       │   └── Moviedetails.jsx
+│   │       ├── MovieGrid/
+│   │       │   ├── MovieGrid.css
+│   │       │   └── MovieGrid.jsx
+│   │       ├── RatingStars/
+│   │       │   ├── RatingStars.css
+│   │       │   └── RatingStars.jsx
+│   │       └── TrailerEmbed/
+│   │           ├── TrailerEmbed.css
+│   │           └── TrailerEmbed.jsx
+│   ├── context/
+│   ├── hooks/
+│   ├── pages/
+│   │   ├── Favorites/
+│   │   ├── Home/
+│   │   │   ├── Home.css
+│   │   │   └── Home.jsx
+│   │   ├── MovieDetails/
+│   │   │   ├── MovieDetails.css
+│   │   │   └── MovieDetails.jsx
+│   │   ├── Search/
+│   │   └── Watch/
+│   │       ├── Watch.css
+│   │       └── Watch.jsx
+│   ├── services/
+│   │   └── api.js
+│   ├── styles/
+│   │   ├── animations.css
+│   │   ├── global.css
+│   │   ├── reset.css
+│   │   └── variables.css
+│   ├── App.jsx
+│   ├── index.css
+│   └── main.jsx
+├── public/
+├── server/
+│   ├── config/
+│   │   └── db.js
+│   ├── controllers/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   └── server.js
+├── .env
+├── .gitignore
+├── eslint.config.js
+├── index.html
+├── package-lock.json
+├── package.json
+├── README.md
+└── vite.config.js
+>>>>>>> Stashed changes
 ```
 
 ---

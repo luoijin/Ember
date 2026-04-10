@@ -1,5 +1,4 @@
-@import '../../../styles/variables.css';
-
+/* MovieGrid.css - ONLY grid layout styles */
 .movie-grid {
   margin: var(--spacing-2xl) 0;
 }
@@ -19,23 +18,7 @@
   padding: var(--spacing-md);
 }
 
-/* Animation */
-.movie-grid {
-  animation: fadeIn var(--transition-slow) ease-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Responsive */
+/* Responsive grid */
 @media (max-width: 1024px) {
   .movie-grid__container {
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));

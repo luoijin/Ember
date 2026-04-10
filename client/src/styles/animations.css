@@ -1,4 +1,4 @@
-/* Reusable Animations */
+/* styles/animations.css - All animations in one place */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -28,39 +28,26 @@
 }
 
 @keyframes pulse {
-  0%, 100% {
-    opacity: 1;
+  0% {
+    opacity: 0.6;
   }
   50% {
-    opacity: 0.5;
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -1000px 0;
+    opacity: 1;
   }
   100% {
-    background-position: 1000px 0;
+    opacity: 0.6;
   }
 }
 
-/* Animation Classes */
+/* Animation utility classes */
 .animate-fade-in {
   animation: fadeIn var(--transition-slow) ease-out;
 }
 
 .animate-slide-up {
-  animation: slideUp var(--transition-normal) ease-out;
+  animation: slideUp var(--transition-normal) ease;
 }
 
-.animate-pulse {
-  animation: pulse 1.5s ease-in-out infinite;
-}
-
-/* Skeleton Loading */
-.skeleton {
-  background: linear-gradient(90deg, var(--bg-tertiary) 25%, var(--bg-hover) 50%, var(--bg-tertiary) 75%);
-  background-size: 1000px 100%;
-  animation: shimmer 2s infinite;
+.animate-spin {
+  animation: spin 1s linear infinite;
 }

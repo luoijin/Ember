@@ -1,19 +1,20 @@
-@import '../../styles/variables.css';
-
+/* Home.css - ONLY Home page specific layout */
 .home {
   min-height: 100vh;
   background: var(--bg-primary);
 }
 
+/* Home page specific hero section */
 .home__hero {
   position: relative;
   height: 80vh;
+  min-height: 500px;
+  background-image: url('https://image.tmdb.org/t/p/original/8cGNquQcTqcGlBpkTFDPfln52nM.jpg');
   background-size: cover;
   background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
   margin-bottom: var(--spacing-2xl);
 }
 
@@ -29,6 +30,7 @@
 .home__hero-content {
   position: relative;
   z-index: 1;
+  text-align: center;
   max-width: 800px;
   padding: var(--spacing-xl);
 }
@@ -42,13 +44,13 @@
 .home__hero-subtitle {
   font-size: var(--font-lg);
   color: var(--text-secondary);
-  margin-bottom: var(--spacing-xl);
 }
 
-/* Responsive */
+/* Responsive - Home page specific */
 @media (max-width: 768px) {
   .home__hero {
     height: 60vh;
+    min-height: 400px;
   }
   
   .home__hero-title {
