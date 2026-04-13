@@ -49,9 +49,7 @@ VITE_TMDB_API_KEY={key}
 ## 📁 Project Structure
 
 ```
-<<<<<<< Updated upstream
 
-=======
 EMBER/
 ├── client/src/
 │   ├── assets/
@@ -134,7 +132,7 @@ EMBER/
 ├── package.json
 ├── README.md
 └── vite.config.js
->>>>>>> Stashed changes
+
 ```
 
 ---
@@ -145,6 +143,7 @@ EMBER/
 |--------|------|--------|---------------|
 | <img src="https://github.com/luoijin.png" width="50" height="50"/> | **Anne Loraine Pardillo** | [@luoijin](https://github.com/luoijin) | |
 | <img src="https://github.com/janninobansag.png" width="50" height="50"/> | **Jan Nino Andrie Bansag** | [@janxxy](https://github.com/janninobansag) | |
+| <img src="https://github.com/raymondchavez333.png" width="50" height="50"/> | **Raymond Chavez** | [@raymondchavez333](https://github.com/raymondchavez333) | |
 
 ---
 
