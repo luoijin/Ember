@@ -10,3 +10,5 @@ export const LoadingSpinner = ({ inline = false }) => {
     </div>
   );
 };
+
+export default LoadingSpinner; 

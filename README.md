@@ -49,6 +49,7 @@ VITE_TMDB_API_KEY={key}
 ## 📁 Project Structure
 
 ```
+
 EMBER/
 ├── client/src/
 │   ├── assets/
@@ -111,12 +112,9 @@ EMBER/
 │   │   ├── global.css
 │   │   ├── reset.css
 │   │   └── variables.css
-│   ├── App.css
 │   ├── App.jsx
 │   ├── index.css
-│   ├── main.jsx
-│   ├── MovieDetails.css
-│   └── Watch.css
+│   └── main.jsx
 ├── public/
 ├── server/
 │   ├── config/
@@ -134,6 +132,7 @@ EMBER/
 ├── package.json
 ├── README.md
 └── vite.config.js
+
 ```
 
 ---

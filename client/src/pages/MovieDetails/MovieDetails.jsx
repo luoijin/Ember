@@ -1,146 +1,195 @@
-import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { movieService } from '../../services/movieService';
-import { LoadingSpinner } from '../../components/common/LoadingSpinner/LoadingSpinner';
-import { RatingStars } from '../../components/movies/RatingStars/RatingStars';
-import { MovieCard } from '../../components/movies/MovieCard/MovieCard';
-import './MovieDetails.css';
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import "./MovieDetails.css";
 
-export default function MovieDetails() {
+const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
+const BASE_URL = "https://api.themoviedb.org/3";
+
+const MovieDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [movie, setMovie] = useState(null);
-  const [similarMovies, setSimilarMovies] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isInWatchlist, setIsInWatchlist] = useState(false);
+  const [watchLater, setWatchLater] = useState(false);
+  const [similarMovies, setSimilarMovies] = useState([]);
+  const [similarLoading, setSimilarLoading] = useState(true);
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
-      setLoading(true);
       try {
-        const [movieData, similarData] = await Promise.all([
-          movieService.getMovieById(id),
-          movieService.getSimilarMovies(id)
-        ]);
-        setMovie(movieData);
-        setSimilarMovies(similarData);
-        
-        // Check if in watchlist (from localStorage for now)
-        const watchlist = JSON.parse(localStorage.getItem('watchlist') || '[]');
-        setIsInWatchlist(watchlist.includes(parseInt(id)));
+        const res = await fetch(`${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=en-US`);
+        const data = await res.json();
+        setMovie(data);
+        setLoading(false);
       } catch (error) {
-        console.error('Error fetching movie details:', error);
-      } finally {
+        console.error("Error fetching movie details:", error);
         setLoading(false);
       }
     };
-    fetchMovieDetails();
+
+    const fetchSimilarMovies = async () => {
+      try {
+        // First try to get recommendations (usually better than similar)
+        const recRes = await fetch(`${BASE_URL}/movie/${id}/recommendations?api_key=${API_KEY}&language=en-US&page=1`);
+        const recData = await recRes.json();
+        
+        let movies = recData.results;
+        
+        // If recommendations are empty, try similar movies
+        if (movies.length === 0) {
+          const simRes = await fetch(`${BASE_URL}/movie/${id}/similar?api_key=${API_KEY}&language=en-US&page=1`);
+          const simData = await simRes.json();
+          movies = simData.results;
+        }
+        
+        // Filter out movies with very different genres or low ratings
+        const currentMovieGenres = movie?.genres?.map(g => g.id) || [];
+        
+        const filteredMovies = movies
+          .filter(m => {
+            // Remove movies with no poster
+            if (!m.poster_path) return false;
+            // Remove movies with very low ratings (below 5)
+            if (m.vote_average < 5) return false;
+            return true;
+          })
+          .slice(0, 12); // Get top 12 movies
+        
+        setSimilarMovies(filteredMovies);
+        setSimilarLoading(false);
+      } catch (error) {
+        console.error("Error fetching similar movies:", error);
+        setSimilarLoading(false);
+      }
+    };
+
+    const checkWatchLater = () => {
+      const watchLaterList = JSON.parse(localStorage.getItem("watchLater") || "[]");
+      setWatchLater(watchLaterList.includes(parseInt(id)));
+    };
+
+    fetchMovieDetails().then(() => {
+      fetchSimilarMovies();
+    });
+    checkWatchLater();
   }, [id]);
 
-  const handlePlay = () => {
-    navigate(`/watch/${id}`);
-  };
-
-  const handleToggleWatchlist = () => {
-    const watchlist = JSON.parse(localStorage.getItem('watchlist') || '[]');
-    if (isInWatchlist) {
-      const newWatchlist = watchlist.filter(movieId => movieId !== parseInt(id));
-      localStorage.setItem('watchlist', JSON.stringify(newWatchlist));
-      setIsInWatchlist(false);
+  const handleWatchLater = () => {
+    const watchLaterList = JSON.parse(localStorage.getItem("watchLater") || "[]");
+    
+    if (watchLaterList.includes(parseInt(id))) {
+      const updatedList = watchLaterList.filter(movieId => movieId !== parseInt(id));
+      localStorage.setItem("watchLater", JSON.stringify(updatedList));
+      setWatchLater(false);
     } else {
-      watchlist.push(parseInt(id));
-      localStorage.setItem('watchlist', JSON.stringify(watchlist));
-      setIsInWatchlist(true);
+      watchLaterList.push(parseInt(id));
+      localStorage.setItem("watchLater", JSON.stringify(watchLaterList));
+      setWatchLater(true);
     }
   };
 
-  if (loading) return <LoadingSpinner />;
-  if (!movie) return <div className="movie-details__error">Movie not found</div>;
+  const handlePlayNow = () => {
+    navigate(`/watch/${id}`);
+  };
 
-  const backdropUrl = movie.backdrop_path 
-    ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
-    : '';
-  const posterUrl = movie.poster_path
-    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-    : '/placeholder.jpg';
+  if (loading) return <div className="loading">Loading movie details...</div>;
+  if (!movie) return <div className="loading">Movie not found</div>;
 
   return (
-    <div className="movie-details">
-      <button className="movie-details__back-button" onClick={() => navigate(-1)}>
-        ← Back
-      </button>
+    <div className="movie-details-container">
+     <button className="back-button" onClick={() => navigate("/")}>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M15 18l-6-6 6-6"/>
+  </svg>
+</button>
 
-      <div className="movie-details__content">
+      <div className="movie-details-content">
         <div 
-          className="movie-details__backdrop" 
-          style={{ backgroundImage: `url(${backdropUrl})` }}
-        />
-        <div className="movie-details__overlay" />
+          className="movie-backdrop"
+          style={{
+            backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`
+          }}
+        >
+          <div className="backdrop-overlay"></div>
+        </div>
 
-        <div className="movie-details__info-wrapper">
-          <div className="movie-details__poster">
-            <img src={posterUrl} alt={movie.title} />
+        <div className="movie-info-wrapper">
+          <div className="movie-poster">
+            <img 
+              src={`https://image.tmdb.org/t/p/w400${movie.poster_path}`} 
+              alt={movie.title}
+            />
           </div>
 
-          <div className="movie-details__info">
-            <h1 className="movie-details__title">{movie.title}</h1>
-            {movie.tagline && (
-              <p className="movie-details__tagline">{movie.tagline}</p>
-            )}
-
-            <div className="movie-details__meta">
-              <span>{new Date(movie.release_date).getFullYear()}</span>
-              <span>•</span>
+          <div className="movie-info">
+            <h1>{movie.title}</h1>
+            {movie.tagline && <p className="tagline">{movie.tagline}</p>}
+            
+            <div className="movie-meta">
+              <span className="rating">★ {movie.vote_average?.toFixed(1)}</span>
+              <span>{movie.release_date?.split("-")[0]}</span>
               <span>{movie.runtime} min</span>
-              <span>•</span>
-              <RatingStars rating={movie.vote_average} />
-              <span className="movie-details__rating">
-                ({movie.vote_count} votes)
-              </span>
             </div>
 
-            <div className="movie-details__genres">
+            <div className="genres">
               {movie.genres?.map(genre => (
-                <span key={genre.id} className="movie-details__genre">
-                  {genre.name}
-                </span>
+                <span key={genre.id} className="genre">{genre.name}</span>
               ))}
             </div>
 
-            <div className="movie-details__overview">
+            <div className="overview">
               <h3>Overview</h3>
               <p>{movie.overview}</p>
             </div>
 
-            <div className="movie-details__actions">
-              <button className="movie-details__play-button" onClick={handlePlay}>
+            <div className="button-group">
+              <button className="play-button" onClick={handlePlayNow}>
                 ▶ Play Now
               </button>
               <button 
-                className={`movie-details__watchlist-button ${isInWatchlist ? 'active' : ''}`}
-                onClick={handleToggleWatchlist}
+                className={`watch-later-button ${watchLater ? 'active' : ''}`} 
+                onClick={handleWatchLater}
               >
-                {isInWatchlist ? '✓ Added to Watchlist' : '+ Add to Watchlist'}
+                {watchLater ? '✓ Added to Watch Later' : '⏱ Watch Later'}
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      {similarMovies.length > 0 && (
-        <div className="movie-details__similar">
-          <h2>Similar Movies</h2>
-          <div className="movie-details__similar-grid">
-            {similarMovies.slice(0, 6).map(movie => (
-              <MovieCard 
+      {/* Similar Movies Section */}
+      <div className="similar-movies-section">
+        <h2>You Might Also Like</h2>
+        {similarLoading ? (
+          <div className="similar-loading">Loading recommendations...</div>
+        ) : similarMovies.length > 0 ? (
+          <div className="similar-movies-grid">
+            {similarMovies.map(movie => (
+              <div 
                 key={movie.id} 
-                movie={movie} 
+                className="similar-movie-card"
                 onClick={() => navigate(`/movie/${movie.id}`)}
-              />
+              >
+                <img 
+                  src={movie.poster_path 
+                    ? `https://image.tmdb.org/t/p/w200${movie.poster_path}` 
+                    : "https://via.placeholder.com/200x300?text=No+Poster"
+                  } 
+                  alt={movie.title}
+                />
+                <div className="similar-movie-info">
+                  <h4>{movie.title}</h4>
+                  <p className="similar-movie-rating">★ {movie.vote_average?.toFixed(1)}</p>
+                </div>
+              </div>
             ))}
           </div>
-        </div>
-      )}
+        ) : (
+          <p className="no-similar-movies">No recommendations available</p>
+        )}
+      </div>
     </div>
   );
-}
+};
+
+export default MovieDetails;

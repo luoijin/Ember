@@ -1,67 +1,34 @@
-import { useParams, useNavigate } from 'react-router-dom';
-import { useState, useEffect, useRef } from 'react';
-import { movieService } from '../../services/movieService';
-import { LoadingSpinner } from '../../components/common/LoadingSpinner/LoadingSpinner';
-import './Watch.css';
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useRef, useState, useEffect } from "react";
+import "./Watch.css";
 
-export default function Watch() {
+const Watch = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [movie, setMovie] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const videoRef = useRef(null);
-
-  useEffect(() => {
-    const fetchMovie = async () => {
-      try {
-        const data = await movieService.getMovieById(id);
-        setMovie(data);
-      } catch (error) {
-        console.error('Error fetching movie:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchMovie();
-  }, [id]);
-
-  const handleFullscreen = () => {
-    if (videoRef.current) {
-      if (videoRef.current.requestFullscreen) {
-        videoRef.current.requestFullscreen();
-      }
-    }
-  };
-
-  if (loading) return <LoadingSpinner />;
-  if (!movie) return <div>Movie not found</div>;
-
-  // Using a placeholder video URL - replace with actual streaming URL
-  const videoUrl = `https://www.youtube.com/embed/${movie.video_key || 'dQw4w9WgXcQ'}?autoplay=1`;
+  const videoContainerRef = useRef(null);
 
   return (
-    <div className="watch">
-      <div className="watch__header">
-        <button className="watch__back-button" onClick={() => navigate(-1)}>
-          ← Back
-        </button>
-        <h1 className="watch__title">{movie.title}</h1>
+    <div className="watch-container">
+      <div className="watch-header">
+        <button className="back-button" onClick={() => navigate(-1)}>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M15 18l-6-6 6-6"/>
+  </svg>
+</button>
+
       </div>
 
-      <div className="watch__video-wrapper">
+      <div className="video-wrapper" ref={videoContainerRef}>
         <iframe
-          ref={videoRef}
-          className="watch__video-iframe"
-          src={videoUrl}
-          title={movie.title}
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          className="video-iframe"
+          src={`https://vidsrc.me/embed/movie?tmdb=${id}`}
+          title="Movie Player"
           allowFullScreen
         />
-        <button className="watch__fullscreen-btn" onClick={handleFullscreen}>
-          ⛶
-        </button>
       </div>
     </div>
   );
-}
+};
+
+export default Watch;

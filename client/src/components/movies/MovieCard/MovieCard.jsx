@@ -1,25 +1,26 @@
+// components/movies/MovieCard/MovieCard.jsx
 import './MovieCard.css';
 
-export const MovieCard = ({ movie, onClick, showOverlayTitle = true }) => {
-  const posterUrl = movie.poster_path
-    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-    : '/placeholder.jpg';
-
+const MovieCard = ({ movie, onClick, onMouseEnter, onMouseLeave, showTitle }) => {
   return (
-    <div className="movie-card" onClick={() => onClick(movie)}>
+    <div 
+      className="movie-card"
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
       <div className="movie-card__image-wrapper">
         <img 
-          src={posterUrl}
-          alt={movie.title}
           className="movie-card__image"
-          loading="lazy"
+          src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} 
+          alt={movie.title} 
         />
-        {showOverlayTitle && (
-          <div className="movie-card__overlay-title">
-            {movie.title}
-          </div>
-        )}
       </div>
+      {showTitle && (
+        <div className="movie-card__overlay-title">
+          {movie.title}
+        </div>
+      )}
       <div className="movie-card__info">
         <h3 className="movie-card__title">{movie.title}</h3>
         <div className="movie-card__rating">
@@ -29,3 +30,5 @@ export const MovieCard = ({ movie, onClick, showOverlayTitle = true }) => {
     </div>
   );
 };
+
+export default MovieCard;
