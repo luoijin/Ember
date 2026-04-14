@@ -32,13 +32,10 @@ Ember is an open-source streaming web app inspired by [Cineby](https://cineby.gd
 git clone https://github.com/ember-stream/ember.git
 cd ember
 
-# Install frontend dependencies
-cd client
+# Install dependencies
 npm install
-npm run dev
-
-# Install backend dependencies
 npm install react-router-dom
+npm run dev
 
 # Put on .env
 VITE_TMDB_API_KEY={key}
