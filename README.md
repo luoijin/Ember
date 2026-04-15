@@ -35,6 +35,7 @@ cd ember
 # Install dependencies
 npm install
 npm install react-router-dom
+npm install @fortawesome/react-fontawesome @fortawesome/free-regular-svg-icons @fortawesome/free-solid-svg-icons
 npm run dev
 
 # Put on .env
