@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useRef, useState, useEffect } from "react";
+import BackButton from "../../components/common/Button/Backbutton";
 import "./Watch.css";
 
 const Watch = () => {
@@ -11,11 +12,7 @@ const Watch = () => {
   return (
     <div className="watch-container">
       <div className="watch-header">
-        <button className="back-button" onClick={() => navigate(-1)}>
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M15 18l-6-6 6-6"/>
-  </svg>
-</button>
+        <BackButton />
 
       </div>
 

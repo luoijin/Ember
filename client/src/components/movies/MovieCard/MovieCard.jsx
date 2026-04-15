@@ -1,4 +1,3 @@
-// components/movies/MovieCard/MovieCard.jsx
 import './MovieCard.css';
 
 const MovieCard = ({ movie, onClick, onMouseEnter, onMouseLeave, showTitle }) => {
@@ -21,12 +20,6 @@ const MovieCard = ({ movie, onClick, onMouseEnter, onMouseLeave, showTitle }) =>
           {movie.title}
         </div>
       )}
-      <div className="movie-card__info">
-        <h3 className="movie-card__title">{movie.title}</h3>
-        <div className="movie-card__rating">
-          {movie.vote_average?.toFixed(1)}
-        </div>
-      </div>
     </div>
   );
 };

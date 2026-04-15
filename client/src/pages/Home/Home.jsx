@@ -4,7 +4,6 @@ import { getPopularMovies, getTopRated, getNowPlaying, getUpcoming } from "../..
 import './Home.css';                              // ✅ CSS import
 import MovieGrid from '../../components/movies/MovieGrid/MovieGrid';  // ✅ Component
 import LoadingSpinner from '../../components/common/LoadingSpinner/LoadingSpinner';  // ✅ Component
-// ❌ REMOVE this line: import "../../styles/global.css"; 
 
 const Home = () => {
   const [popularMovies, setPopularMovies] = useState([]);
@@ -29,7 +28,7 @@ const Home = () => {
       });
   }, []);
 
-  if (loading) return <LoadingSpinner />;  // ✅ Now using LoadingSpinner component
+  if (loading) return <LoadingSpinner />;  // Now using LoadingSpinner component
 
   return (
     <div className="home">

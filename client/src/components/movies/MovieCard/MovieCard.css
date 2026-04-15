@@ -9,7 +9,7 @@
 }
 
 .movie-card:hover {
-  transform: translateY(-8px);
+  /* transform: translateY(-8px); */
   box-shadow: var(--shadow-lg);
 }
 
@@ -58,19 +58,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.movie-card__rating {
-  font-size: var(--font-xs);
-  color: var(--text-secondary);
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-}
-
-.movie-card__rating::before {
-  content: '★';
-  color: gold;
 }
 
 /* Responsive - only what's specific to MovieCard */
