@@ -36,3 +36,19 @@
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent);
 }
+
+/* app*/
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app__main {
+  flex: 1;
+}
+
+/* Ensure footer stays at bottom */
+.footer {
+  margin-top: auto;
+}
