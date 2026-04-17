@@ -1,21 +1,35 @@
 @import '../../../styles/variables.css';
 
-/* Modern Glassmorphism Header */
+/* Base Header Styles */
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
-  background: rgba(10, 10, 10, 0.7);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   transition: all var(--transition-normal);
 }
 
-/* Add shadow on scroll - will be added via JS later */
-.header.scrolled {
-  background: rgba(10, 10, 10, 0.85);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+/* Transparent State (at top) */
+.header--transparent {
+  background: transparent;
+  backdrop-filter: none;
+  border-bottom: 1px solid transparent;
+}
+
+.header--transparent .header__logo-text {
+  background: linear-gradient(135deg, var(--accent) 0%, #ff4d4d 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Scrolled State (solid background) */
+.header--scrolled {
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 .header__container {
@@ -28,7 +42,7 @@
   gap: var(--spacing-lg);
 }
 
-/* Logo - Modern Minimal */
+/* Logo */
 .header__logo {
   display: flex;
   align-items: center;
@@ -53,21 +67,11 @@
 .header__logo-text {
   font-size: var(--font-xl);
   font-weight: 800;
-  background: linear-gradient(135deg, var(--accent) 0%, #ff4d4d 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
   letter-spacing: -0.5px;
   transition: all var(--transition-fast);
 }
 
-.header__logo:hover .header__logo-text {
-  background: linear-gradient(135deg, #ff4d4d 0%, var(--accent) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-}
-
-/* Navigation - Sleek Links */
+/* Navigation */
 .header__nav {
   display: flex;
   align-items: center;
@@ -109,14 +113,14 @@
   color: white;
 }
 
-/* Search Icon - Rounded Glass */
+/* Search Icon */
 .header__search {
   flex-shrink: 0;
 }
 
 .header__search-button {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   color: rgba(255, 255, 255, 0.9);
   width: 42px;
   height: 42px;
@@ -126,11 +130,20 @@
   justify-content: center;
   cursor: pointer;
   transition: all var(--transition-fast);
-  backdrop-filter: blur(10px);
+}
+
+.header--transparent .header__search-button {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.header--scrolled .header__search-button {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 .header__search-button:hover {
-  background: rgba(229, 9, 20, 0.15);
+  background: rgba(229, 9, 20, 0.2);
   border-color: var(--accent);
   color: var(--accent);
   transform: translateY(-2px);
@@ -141,14 +154,14 @@
   height: 18px;
 }
 
-/* User Menu - Sharp Circle */
+/* User Menu */
 .header__user {
   flex-shrink: 0;
 }
 
 .header__user-button {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   color: rgba(255, 255, 255, 0.9);
   width: 42px;
   height: 42px;
@@ -160,8 +173,18 @@
   transition: all var(--transition-fast);
 }
 
+.header--transparent .header__user-button {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.header--scrolled .header__user-button {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
 .header__user-button:hover {
-  background: rgba(229, 9, 20, 0.15);
+  background: rgba(229, 9, 20, 0.2);
   border-color: var(--accent);
   color: var(--accent);
   transform: translateY(-2px);
@@ -181,7 +204,23 @@
   left: 0;
   right: 0;
   width: 100%;
-  background: linear-gradient(90deg, var(--accent), #ff4d4d);
+}
+
+/* Gradient Border Bottom */
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.header--scrolled::after {
+  opacity: 0.3;
 }
 
 /* Responsive Design */
@@ -189,10 +228,6 @@
   .header__container {
     padding: var(--spacing-sm) var(--spacing-md);
     flex-wrap: wrap;
-  }
-
-  .header__logo {
-    flex-shrink: 0;
   }
 
   .header__logo-image {
@@ -251,16 +286,4 @@
     width: 16px;
     height: 16px;
   }
-}
-
-/* Optional: Add a subtle gradient border at bottom */
-.header::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  opacity: 0.3;
 }

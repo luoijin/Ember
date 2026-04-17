@@ -35,4 +35,30 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent);
+<<<<<<< Updated upstream
 }
+=======
+}
+
+/* app*/
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app__main {
+  flex: 1;
+  padding-top: 60px; /* Default for all pages */
+
+}
+
+.app__main:has(.home) {
+  padding-top: 0;
+}
+
+/* Ensure footer stays at bottom */
+.footer {
+  margin-top: auto;
+}
+>>>>>>> Stashed changes
