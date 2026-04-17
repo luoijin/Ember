@@ -35,9 +35,6 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent);
-<<<<<<< Updated upstream
-}
-=======
 }
 
 /* app*/
@@ -61,4 +58,3 @@
 .footer {
   margin-top: auto;
 }
->>>>>>> Stashed changes
